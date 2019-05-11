@@ -1,13 +1,14 @@
 import Tweet from './Tweet'
 import { fetchTweets } from '../services'
 
-export default class TweetList {
+class TweetList {
   constructor (props) {
     this.container = document.getElementById(props.tweetsContainer)
   }
 
-  async render () {
+  render () {
     try {
+      // API
       this.tweets = fetchTweets()
       const html = this.tweets.map(t => {
         const tweet = new Tweet(t)
@@ -19,3 +20,5 @@ export default class TweetList {
     }
   }
 }
+
+export default TweetList
