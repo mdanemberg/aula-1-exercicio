@@ -1,10 +1,20 @@
 import Tweet from './Tweet'
-// import { postTweet } from '../services'
 
 export default class TweetForm {
   constructor (props) {
     this.formContainer = document.getElementById(props.form)
     this.container = document.getElementById(props.tweetsContainer)
+  }
+
+  add () {
+    const tweet = new Tweet({
+      text: this.text,
+      name: this.name
+    })
+
+    document.forms['create-tweet']['tweet'].value = ''
+    document.forms['create-tweet']['name'].value = ''
+    this.container.insertBefore(tweet.render(), this.container.firstChild)
   }
 
   onSubmit (e) {
@@ -15,13 +25,6 @@ export default class TweetForm {
     if (this.text && this.name) {
       this.add()
     }
-  }
-
-  add () {
-    const tweet = new Tweet({text: this.text, name: this.name})
-    document.forms['create-tweet']['tweet'].value = ''
-    document.forms['create-tweet']['name'].value = ''
-    this.container.insertBefore(tweet.render(), this.container.firstChild)
   }
 
   binds () {
